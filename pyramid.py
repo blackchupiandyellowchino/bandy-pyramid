@@ -9,6 +9,7 @@
 # Objetos que colaboren con el problema
 # Subir a Github papwa
 # Si papwa
+# Dale mamerto
 
 #139			-> 21					-
 #75 64			-> 19-20				- -
