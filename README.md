@@ -1,2 +1,3 @@
 # numeral-pyramid
-Hola, boludo.
+
+Pirámide numérica programada utilizando el lenguaje Python.
