@@ -17,4 +17,6 @@
 
 # No se puede usar un array para definir la piramide
 
+# Si se podrian definir arrays por fila (supongo)
+
 # Celdas -> Filas -> Piramide (clases)
