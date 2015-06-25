@@ -39,34 +39,57 @@
 
 
 # Crear 21 objetos de tipo celda (si, aspero)
-# Las celdas 16-21 no tienen hijos -> No son suma de otras celdas
-# La celda 1 no tiene padre -> No es sumando de ninguna celda
-# El corrimiento deberia ser desde el tope, asi que no seria necesario definir el/los pares de una celda
-# Los hijos de las celdas 16-21 serían NULL? 
+
+# Celdas izq -> tienen un solo padre (derecha)
+# Celdas der -> tienen un solo padre (izquierda)
+# Celdas hijas -> no tienen hijos
+# Celdas izq hijas -> no tienen hijos y un solo padre (derecha)
+# Celdas der hijas -> no tienen hijos y un solo padre (derecha)
+
+
+# f(1) = padre
+# f(1<n<4) + 1 = celdas izq
+# f(1<n<=5) = celdas der
+# f(6) = celda der fondo
+# f(5) + 1 = celda izq fondo
+# f(5) + {2,3,4,5} = celdas fondo
 
 
 
 
 
-class Celda:
-	"""Clase definida para las celdas"""
+#class Celda:
+#	"""Clase definida para las celdas"""
+#	def __init__(self):
+#		self.value = 0
+#		self.hijo_izq = 0
+#		self.hijo_der = 0
+#		#self.hidden = True
+#	def set_value (self,value):
+#		self.value = value
+#	def set_sons (self,izq,der):
+#		self.hijo_izq = izq
+#		self.hijo_der = der
+
+#cell1 = Celda()
+#cell2 = Celda()
+#cell2.set_value(5)
+#cell3 = Celda()
+#cell3.set_value(5)
+
+
+class papwa:
 	def __init__(self):
-		self.value = 0
-		self.hijo_izq = 0
-		self.hijo_der = 0
-		#self.hidden = True
-	def set_value (self,value):
-		self.value = value
-	def set_sons (self,izq,der):
-		self.hijo_izq = izq
-		self.hijo_der = der
+		self.valor = 0
+	def fact(self,valor):
+		self.valor = valor
+		if (self.valor == 1):
+			self.n = 1
+			return self.n
+		else:
+			self.n = self.valor + self.fact(self.valor - 1)
+			return self.n
 
-cell1 = Celda()
-cell2 = Celda()
-cell2.set_value(5)
-cell3 = Celda()
-cell3.set_value(5)
-
-
-
+hola = papwa()
+print hola.fact(6)
 
