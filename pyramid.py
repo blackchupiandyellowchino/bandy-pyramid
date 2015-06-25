@@ -6,7 +6,7 @@
 # Nota maxima si no se imprime la piramide: 8
 # Nota maxima si no se toman en cuenta ejercicios que no se puedan resolver: 7
 # Ejercicios con solucion unica. Si se encuentran uno o mas soluciones, faltan datos o no se puede resolver
-
+# No se puede usar un array para definir la piramide
 
 
 
@@ -25,25 +25,25 @@
 #6 11 10 6 5	-> 11-12-13-14-15			- -
 #1 5 6 4 2 3	-> 16-17-18-19-20-21		-
 
-# No se puede usar un array para definir la piramide
-
-# Si se podrian definir arrays por fila (supongo)
-
-# Celdas -> (Filas?) -> Piramide (clases)
-
 
 
 # Funcion para definir cantidad total de celdas
-# n = cantidad de celdas en la ultima fila (desde arriba)
+# n = cantidad de celdas en la ultima fila (desde arriba) = altura
 
 # f(1) = 1
-# f(2) = f(1) + 2 = 3
-# f(3) = f(2) + 3 = 6
-# f(4) = f(3) + 4 = 10
-# f(5) = f(4) + 5 = 15
-# f(6) = f(5) + 6 = 21
-
 # f(n) = f(n-1) + n
+
+# c = corrimiento de celdas donde c = {0, ..., n-1}
+# valor[f(n) + c] = valor [(f(n+1) + c)] + valor [(f(n+1) + c + 1)]
+
+
+
+# Crear 21 objetos de tipo celda (si, aspero)
+# Las celdas 16-21 no tienen hijos -> No son suma de otras celdas
+# La celda 1 no tiene padre -> No es sumando de ninguna celda
+# El corrimiento deberia ser desde el tope, asi que no seria necesario definir el/los pares de una celda
+# Los hijos de las celdas 16-21 serían NULL? 
+
 
 
 
@@ -51,7 +51,22 @@
 class Celda:
 	"""Clase definida para las celdas"""
 	def __init__(self):
-		self.x = 1
-		self.y = 1
 		self.value = 0
-		self.hidden = True
+		self.hijo_izq = 0
+		self.hijo_der = 0
+		#self.hidden = True
+	def set_value (self,value):
+		self.value = value
+	def set_sons (self,izq,der):
+		self.hijo_izq = izq
+		self.hijo_der = der
+
+cell1 = Celda()
+cell2 = Celda()
+cell2.set_value(5)
+cell3 = Celda()
+cell3.set_value(5)
+
+
+
+
