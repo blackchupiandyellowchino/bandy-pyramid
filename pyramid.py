@@ -18,12 +18,12 @@
 
 # Objetos que colaboren con el problema
 
-#139			-> 1						-
-#75 64			-> 2-3						- -
-#38 37 27		-> 4-5-6					- - ->
-#17 21 16 11	-> 7-8-9-10					- -	->  (-1)
-#6 11 10 6 5	-> 11-12-13-14-15			- -
-#1 5 6 4 2 3	-> 16-17-18-19-20-21		-
+#139			->         1						
+#75 64			->        2 3						
+#38 37 27		->      4  5 6			
+#17 21 16 11	->    7  8  9 10		
+#6 11 10 6 5	->  11-12-13-14-15		
+#1 5 6 4 2 3	-> 16-17-18-19-20-21
 
 
 
@@ -50,46 +50,99 @@
 # f(1) = padre
 # f(1<n<4) + 1 = celdas izq
 # f(1<n<=5) = celdas der
-# f(6) = celda der fondo
 # f(5) + 1 = celda izq fondo
 # f(5) + {2,3,4,5} = celdas fondo
+# f(6) = celda der fondo
 
 
+# Matriz global que contiene los valores de la piramide. 
+v = []
+
+for i in range(21):
+	v.append(i)
+
+class Celda:
+
+	def __init__(self,pos,valor):
+		self.pos = pos
+		v[self.pos] = valor
+		self.hijo_der = self.set_hijo_der()
+		self.hijo_izq = self.set_hijo_izq()
+		self.padre_izq = self.set_Padre_izq()
+		self.padre_der = self.set_Padre_der()
+		#self.hidden = True
 
 
+	def set_Padre_izq(self):
+		self.v = (self.pos + self.get_high())
 
-#class Celda:
-#	"""Clase definida para las celdas"""
-#	def __init__(self):
-#		self.value = 0
-#		self.hijo_izq = 0
-#		self.hijo_der = 0
-#		#self.hidden = True
-#	def set_value (self,value):
-#		self.value = value
-#	def set_sons (self,izq,der):
-#		self.hijo_izq = izq
-#		self.hijo_der = der
+		# Si el hijo izquierdo es f(n) + 1
 
-#cell1 = Celda()
-#cell2 = Celda()
-#cell2.set_value(5)
-#cell3 = Celda()
-#cell3.set_value(5)
-
-
-class papwa:
-	def __init__(self):
-		self.valor = 0
-	def fact(self,valor):
-		self.valor = valor
-		if (self.valor == 1):
-			self.n = 1
-			return self.n
+		if(self.v == self.fact( self.get_high() ) + 1 ):
+			return 0
 		else:
-			self.n = self.valor + self.fact(self.valor - 1)
-			return self.n
+			return self.pos - self.get_high()
 
-hola = papwa()
-print hola.fact(6)
 
+	def set_Padre_der(self):
+		self.v = (self.pos + self.get_high() + 1)
+
+		# Si el hijo derecho es f(n)
+
+		if(self.v == self.fact(self.get_high()+1)):
+			return 0
+		else:
+			return self.pos - self.get_high() + 1
+
+
+	def set_hijo_izq(self):
+		if (self.pos >= 16 and self.pos <= 21):
+			return 0
+		else:
+			self.v = self.pos + self.get_high()
+			return self.v
+
+
+	def set_hijo_der(self):
+		if (self.pos >= 16 and self.pos <= 21):
+			return 0
+		else:
+			self.v = self.pos + self.get_high() + 1
+			return self.v
+
+
+
+	def get_high(self):
+		if (self.pos == 1):
+			return 1
+		elif(self.pos == 2 or self.pos == 3):
+			return 2
+		elif (self.pos >= 4 and self.pos <= 6):
+			return 3
+		elif(self.pos >= 7 and self.pos <= 10):
+			return 4
+		elif(self.pos >= 11 and self.pos <= 15):
+			return 5
+		else:
+			return 6
+
+	def fact(self,n):
+		self.n = n
+		if (self.n == 1):
+			return 1
+		else:
+			return self.n + self.fact(self.n - 1)
+
+
+# Pasadas... eeeeeeh ... 3 ?
+
+
+Celda1 = Celda(13,1)
+#Celda2 = Celda(2,2)
+#Celda3 = Celda(3,3)
+print Celda1.pos
+#print "Altura: " + str(Celda1.get_high())
+print "Padre izq: " + str(Celda1.padre_izq)
+print "Padre der: " + str(Celda1.padre_der)
+print "Hijo izq: " + str(Celda1.hijo_izq)
+print "Hijo der: " + str(Celda1.hijo_der)
