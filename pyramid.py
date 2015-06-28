@@ -40,6 +40,14 @@
 
 # Crear 21 objetos de tipo celda (si, aspero)
 
+
+# Matriz global que contiene los valores de la piramide. 
+v = []
+
+for i in range(21):
+	v.append(i)
+
+
 # Celdas izq -> tienen un solo padre (derecha)
 # Celdas der -> tienen un solo padre (izquierda)
 # Celdas hijas -> no tienen hijos
@@ -55,12 +63,6 @@
 # f(6) = celda der fondo
 
 
-# Matriz global que contiene los valores de la piramide. 
-v = []
-
-for i in range(21):
-	v.append(i)
-
 class Celda:
 
 	def __init__(self,pos,valor):
@@ -72,6 +74,7 @@ class Celda:
 		self.padre_der = self.set_Padre_der()
 		#self.hidden = True
 
+# No se si son muy necesarias estas funciones, pero definen los padres posibles de cada celda
 
 	def set_Padre_izq(self):
 		self.v = (self.pos + self.get_high())
@@ -79,7 +82,7 @@ class Celda:
 		# Si el hijo izquierdo es f(n) + 1
 
 		if(self.v == self.fact( self.get_high() ) + 1 ):
-			return 0
+			return -1
 		else:
 			return self.pos - self.get_high()
 
@@ -90,14 +93,16 @@ class Celda:
 		# Si el hijo derecho es f(n)
 
 		if(self.v == self.fact(self.get_high()+1)):
-			return 0
+			return -1
 		else:
 			return self.pos - self.get_high() + 1
 
 
+# Funciones que definen los posibles hijos de cada celda, exceptuando los del piso
+
 	def set_hijo_izq(self):
 		if (self.pos >= 16 and self.pos <= 21):
-			return 0
+			return -1
 		else:
 			self.v = self.pos + self.get_high()
 			return self.v
@@ -105,12 +110,13 @@ class Celda:
 
 	def set_hijo_der(self):
 		if (self.pos >= 16 and self.pos <= 21):
-			return 0
+			return -1
 		else:
 			self.v = self.pos + self.get_high() + 1
 			return self.v
 
 
+# Funcion que devuelve el nivel de la celda (del 1 al 6)
 
 	def get_high(self):
 		if (self.pos == 1):
@@ -126,6 +132,9 @@ class Celda:
 		else:
 			return 6
 
+
+# Funcion f(1) = 1; f(n) = f(n-1) + n
+
 	def fact(self,n):
 		self.n = n
 		if (self.n == 1):
@@ -136,12 +145,28 @@ class Celda:
 
 # Pasadas... eeeeeeh ... 3 ?
 
+# Si, 3. En realidad podrian ser mas, pero si omitimos usar a las celdas padres
 
-Celda1 = Celda(13,1)
+# "La piramide la debe poder resolver un chico de 5" -> Supongo que no saben de eliminacion por Gauss
+# asi que no la incluyo
+
+
+
+class Piramide(Celda):
+	def __init__(self):
+		#self.set_celdas()
+		#self.calcular()
+		#self.mostrar()
+		pass
+
+
+
+
+Celda1 = Celda(16,1)
 #Celda2 = Celda(2,2)
 #Celda3 = Celda(3,3)
 print Celda1.pos
-#print "Altura: " + str(Celda1.get_high())
+print "Altura: " + str(Celda1.get_high())
 print "Padre izq: " + str(Celda1.padre_izq)
 print "Padre der: " + str(Celda1.padre_der)
 print "Hijo izq: " + str(Celda1.hijo_izq)
