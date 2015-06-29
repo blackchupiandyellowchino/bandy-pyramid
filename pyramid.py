@@ -44,9 +44,8 @@
 # Matriz global que contiene los valores de la piramide. 
 v = []
 
-for i in range(21):
+for i in range(22):
 	v.append(i)
-
 
 # Celdas izq -> tienen un solo padre (derecha)
 # Celdas der -> tienen un solo padre (izquierda)
@@ -64,7 +63,6 @@ for i in range(21):
 
 
 class Celda:
-
 	def __init__(self,pos,valor):
 		self.pos = pos
 		v[self.pos] = valor
@@ -73,6 +71,7 @@ class Celda:
 		self.padre_izq = self.set_Padre_izq()
 		self.padre_der = self.set_Padre_der()
 		#self.hidden = True
+
 
 # No se si son muy necesarias estas funciones, pero definen los padres posibles de cada celda
 
@@ -143,31 +142,103 @@ class Celda:
 			return self.n + self.fact(self.n - 1)
 
 
+# Funciones exclusivas para la piramide
+
+	def calcular(self):
+
+		# Siendo a = pos; b y c los hijos der e izq
+
+		if(v[self.hijo_der] != -1 and v[self.hijo_izq] != -1):
+
+			# Si no existe a pero si b y c -> a = b + c
+
+			if(v[self.pos]== 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] != 0):
+				v[self.pos] = v[self.hijo_der] + v[self.hijo_izq]
+
+			# Si b no existe pero si a y c -> b = a - c
+
+			elif(v[self.pos]!= 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] == 0):
+				v[self.hijo_izq] = v[self.pos] - v[self.hijo_der]
+
+			# Si c no existe pero si a y b -> c = a - b
+
+			elif(v[self.pos]!= 0 and v[self.hijo_der] == 0 and v[self.hijo_izq] != 0):
+				v[self.hijo_der] = v[self.pos] - v[self.hijo_izq]
+
+			# Si existen los tres
+
+			if(v[self.pos]!= 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] != 0):
+				self.correct = self.check()
+				if(self.correct == 1):
+					return 1
+
+		return 0
+
+	def check(self):
+		if (v[self.pos] == v[self.hijo_der] + v[self.hijo_izq]):
+			return 1
+		else:
+			return 0
+
+
 # Pasadas... eeeeeeh ... 3 ?
 
-# Si, 3. En realidad podrian ser mas, pero si omitimos usar a las celdas padres
+# Si, 3. En realidad podrian ser mas, pero solo si omitimos usar las celdas padres
+# Es un quilombo calcular los padres tambien, incluso innecesario sabiendo que calculamos la piramide
+# desde la cima. El mambo es la cantidad de pasadas que deberia hacerse en la piramide si no usamos
+# a los padres
+
 
 # "La piramide la debe poder resolver un chico de 5" -> Supongo que no saben de eliminacion por Gauss
 # asi que no la incluyo
 
 
 
+# Mambo objetos: hay que crear las 21 celdas FUERA de las clases y DESPUES crear un objeto piramide
+# Las funciones de calculo e impresion deben crearse dentro de la clase CELDA
+
+# Los valores de cada celda fueron dados al principio. La piramide deberia poder calcular los valores
+# faltantes e imprimirse
+
+
+
+
 class Piramide(Celda):
 	def __init__(self):
-		#self.set_celdas()
-		#self.calcular()
+		self.pasadas = 0
+		self.pir_calculo()
 		#self.mostrar()
-		pass
+		#pass
+
+	def pir_calculo(self):
+		self.completed = 0
+		self.completed+= Celda1.calcular()
+		self.completed+= Celda2.calcular()
+		self.completed+= Celda3.calcular()
+		if (self.completed == 3):
+			print "Piramide completa"
+			return 1
+		else:
+			return 0
+		#Celda1.calcular()
+		#Celda1.calcular()
+		#Celda1.calcular()
 
 
 
 
-Celda1 = Celda(16,1)
-#Celda2 = Celda(2,2)
-#Celda3 = Celda(3,3)
-print Celda1.pos
-print "Altura: " + str(Celda1.get_high())
-print "Padre izq: " + str(Celda1.padre_izq)
-print "Padre der: " + str(Celda1.padre_der)
-print "Hijo izq: " + str(Celda1.hijo_izq)
-print "Hijo der: " + str(Celda1.hijo_der)
+Celda1 = Celda(1,18)
+Celda2 = Celda(2,8)
+Celda3 = Celda(3,0)
+Celda4 = Celda(4,0)
+Celda5 = Celda(5,3)
+Celda6 = Celda(6,2)
+
+
+P = Piramide()
+print v[Celda4.pos]
+#print "Altura: " + str(Celda1.get_high())
+#print "Padre izq: " + str(Celda1.padre_izq)
+#print "Padre der: " + str(Celda1.padre_der)
+#print "Hijo izq: " + str(Celda1.hijo_izq)
+#print "Hijo der: " + str(Celda1.hijo_der)
