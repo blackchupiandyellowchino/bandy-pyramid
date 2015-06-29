@@ -148,29 +148,29 @@ class Celda:
 
 		# Siendo a = pos; b y c los hijos der e izq
 
-		if(v[self.hijo_der] != -1 and v[self.hijo_izq] != -1):
+		#if(v[self.hijo_der] != -1 and v[self.hijo_izq] != -1):
 
-			# Si no existe a pero si b y c -> a = b + c
+		# Si no existe a pero si b y c -> a = b + c
 
-			if(v[self.pos]== 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] != 0):
-				v[self.pos] = v[self.hijo_der] + v[self.hijo_izq]
+		if(v[self.pos]== 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] != 0):
+			v[self.pos] = v[self.hijo_der] + v[self.hijo_izq]
 
-			# Si b no existe pero si a y c -> b = a - c
+		# Si b no existe pero si a y c -> b = a - c
 
-			elif(v[self.pos]!= 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] == 0):
-				v[self.hijo_izq] = v[self.pos] - v[self.hijo_der]
+		elif(v[self.pos]!= 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] == 0):
+			v[self.hijo_izq] = v[self.pos] - v[self.hijo_der]
 
-			# Si c no existe pero si a y b -> c = a - b
+		# Si c no existe pero si a y b -> c = a - b
 
-			elif(v[self.pos]!= 0 and v[self.hijo_der] == 0 and v[self.hijo_izq] != 0):
-				v[self.hijo_der] = v[self.pos] - v[self.hijo_izq]
+		elif(v[self.pos]!= 0 and v[self.hijo_der] == 0 and v[self.hijo_izq] != 0):
+			v[self.hijo_der] = v[self.pos] - v[self.hijo_izq]
 
 			# Si existen los tres
 
-			if(v[self.pos]!= 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] != 0):
-				self.correct = self.check()
-				if(self.correct == 1):
-					return 1
+		if(v[self.pos]!= 0 and v[self.hijo_der] != 0 and v[self.hijo_izq] != 0):
+			self.correct = self.check()
+			if(self.correct == 1):
+				return 1
 
 		return 0
 
@@ -178,6 +178,7 @@ class Celda:
 		if (v[self.pos] == v[self.hijo_der] + v[self.hijo_izq]):
 			return 1
 		else:
+			#SALIR DEL PROGRAMA
 			return 0
 
 
@@ -201,28 +202,25 @@ class Celda:
 # faltantes e imprimirse
 
 
-
-
 class Piramide(Celda):
 	def __init__(self):
 		self.pasadas = 0
 		self.pir_calculo()
-		#self.mostrar()
-		#pass
 
 	def pir_calculo(self):
+		#if(pasadas == 7):
+			#print "No se puede"
+			#SALIR DEL PROGRAMA
 		self.completed = 0
 		self.completed+= Celda1.calcular()
 		self.completed+= Celda2.calcular()
 		self.completed+= Celda3.calcular()
 		if (self.completed == 3):
 			print "Piramide completa"
-			return 1
+			#imprimir()
 		else:
-			return 0
-		#Celda1.calcular()
-		#Celda1.calcular()
-		#Celda1.calcular()
+			#pasadas++
+			#pir_calculo()
 
 
 
@@ -236,7 +234,6 @@ Celda6 = Celda(6,2)
 
 
 P = Piramide()
-print v[Celda4.pos]
 #print "Altura: " + str(Celda1.get_high())
 #print "Padre izq: " + str(Celda1.padre_izq)
 #print "Padre der: " + str(Celda1.padre_der)
