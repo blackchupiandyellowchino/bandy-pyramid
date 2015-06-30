@@ -200,12 +200,12 @@ class Piramide(Celda):
 			self.pir_calculo()
 
 	def imprimir(self):
-		print(str(v[1]))
-		print(str(v[2]) + " " + str(v[3]))
-		print(str(v[4]) + " " + str(v[5]) + " " + str(v[6]))
-		print(str(v[7]) + " " + str(v[8]) + " " + str(v[9]) + " " + str(v[10]))
-		print(str(v[11]) + " " + str(v[12]) + " " + str(v[13]) + " " + str(v[14]) + " " + str(v[15]))
-		print(str(v[16]) + " " + str(v[17]) + " " + str(v[18]) + " " + str(v[19]) + " " + str(v[20]) + " " + str(v[21]))
+		print('%12s' % str(v[1]))
+		print('%10s' % str(v[2]) + " " + str(v[3]))
+		print('%9s' % str(v[4]) + " " + str(v[5]) + " " + str(v[6]))
+		print('%8s' % str(v[7]) + " " + str(v[8]) + " " + str(v[9]) + " " + str(v[10]))
+		print('%7s' % str(v[11]) + " " + str(v[12]) + " " + str(v[13]) + " " + str(v[14]) + " " + str(v[15]))
+		print('%6s' % str(v[16]) + " " + str(v[17]) + " " + str(v[18]) + " " + str(v[19]) + " " + str(v[20]) + " " + str(v[21]))
 
 
 #139			>         1						
