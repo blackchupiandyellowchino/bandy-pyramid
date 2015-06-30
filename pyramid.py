@@ -134,7 +134,7 @@ class Celda:
 			return 1
 		else:
 			#SALIR DEL PROGRAMA
-			sys.exit("No se puede resolver la piramide.")
+			sys.exit("No se puede resolver la piramide. Las cuentas no son correctas")
 
 
 
@@ -156,7 +156,7 @@ class Piramide(Celda):
 		if(self.pasadas == 7):
 			#print "No se puede"
 			#SALIR DEL PROGRAMA
-			sys.exit("No se puede resolver la piramide")
+			sys.exit("No se puede resolver la piramide. Faltan datos")
 		self.completed = 0
 		self.completed+= Celda1.calcular()
 		self.completed+= Celda2.calcular()
