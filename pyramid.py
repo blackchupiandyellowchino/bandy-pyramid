@@ -176,6 +176,9 @@ class Piramide(Celda):
 
 		if (self.completed == 15):
 			print "Piramide completa"
+			print "\n"
+			print "\n"
+			print "\n"
 			self.imprimir()
 		else:
 			self.pasadas+= 1
