@@ -191,8 +191,9 @@ class Piramide(Celda):
 		print('%8s' % str(v[7]) + " " + str(v[8]) + " " + str(v[9]) + " " + str(v[10]))
 		print('%7s' % str(v[11]) + " " + str(v[12]) + " " + str(v[13]) + " " + str(v[14]) + " " + str(v[15]))
 		print('%6s' % str(v[16]) + " " + str(v[17]) + " " + str(v[18]) + " " + str(v[19]) + " " + str(v[20]) + " " + str(v[21]))
-
-
+		print "\n"
+		print "\n"
+		print "\n"
 #139			>         1						
 #75 64			>        2 3						
 #38 37 27		>      4  5 6			
